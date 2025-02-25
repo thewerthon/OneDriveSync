@@ -23,12 +23,11 @@ jobs:
 
       - name: Create SFX Archives
         run: |
-          cd Config
-          
-          foreach ($dir in Get-ChildItem -Directory) {
+          foreach ($dir in Get-ChildItem Config -Directory) {
             $folder_name = $dir.Name
+            $icon_path = "OneDriveIcon.ico"
             $extraction_path = "C:\Startup\OneDrive"
-            & "C:\Program Files\7-Zip\7z.exe" a -sfx7z.sfx "../$folder_name.exe" "$dir\*" -o"$extraction_path" -i"../OneDriveIcon.ico"
+            & "C:\Program Files\7-Zip\7z.exe" a -sfx7z.sfx "$folder_name.exe" "$dir\*" -o"$extraction_path" -i"$icon_path"
           }
 
       - name: Publish Release
@@ -40,6 +39,6 @@ jobs:
           body: "Auto generated release."
           draft: false
           prerelease: false
-          files: Config/*.exe
+          files: /*.exe
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
