@@ -1,0 +1,47 @@
+name: Create SFX Archives
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: windows-latest
+
+    env:
+      version: "v1.0"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install 7-Zip
+        run: |
+          choco install 7zip  # Instala o 7-Zip via Chocolatey
+
+      - name: Create SFX Archives
+        run: |
+          cd Config
+          
+          for dir in */; do
+            if [ -d "$dir" ]; then
+              folder_name=$(basename "$dir")
+              extraction_path="C:\\Startup\\OneDrive"
+              7z a -sfx7z.sfx "../$folder_name.exe" "$dir"/* -o"$extraction_path" -i../OneDriveIcon.ico
+            fi
+          done
+
+      - name: Publish Release
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ env.version }}.${{ github.run_number }}
+          name: "Release ${{ env.version }}.${{ github.run_number }}"
+          body: "Auto generated release."
+          draft: false
+          prerelease: false
+          files: Config/*.exe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
