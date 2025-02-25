@@ -26,7 +26,8 @@ jobs:
           foreach ($dir in Get-ChildItem Config -Directory) {
             $folder_name = $dir.Name
             $extraction_path = "C:\Startup\OneDrive"
-            & "C:\Program Files\7-Zip\7z.exe" a -sfx7z.sfx "$folder_name.exe" "$dir\*" -o"$extraction_path"
+            $sfx_module_path = "C:\Program Files\7-Zip\sfx7z.sfx"
+            & "C:\Program Files\7-Zip\7z.exe" a -sfx"$sfx_module_path" "$folder_name.exe" "$dir\*" -o"$extraction_path"
           }
 
       - name: Publish Release
