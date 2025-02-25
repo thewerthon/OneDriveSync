@@ -25,9 +25,8 @@ jobs:
         run: |
           foreach ($dir in Get-ChildItem Config -Directory) {
             $folder_name = $dir.Name
-            $icon_path = "${PWD}\OneDriveIcon.ico"
             $extraction_path = "C:\Startup\OneDrive"
-            & "C:\Program Files\7-Zip\7z.exe" a -sfx7z.sfx "$folder_name.exe" "$dir\*" -o"$extraction_path" -i"$icon_path"
+            & "C:\Program Files\7-Zip\7z.exe" a -sfx7z.sfx "$folder_name.exe" "$dir\*" -o"$extraction_path"
           }
 
       - name: Publish Release
