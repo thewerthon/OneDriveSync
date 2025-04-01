@@ -1,0 +1,19 @@
+<svg width="101.2" height="20" viewBox="0 0 1012 200" xmlns="http://www.w3.org/2000/svg">
+  <linearGradient id="a" x2="0" y2="100%">
+    <stop offset="0" stop-opacity=".1" stop-color="#EEE"/>
+    <stop offset="1" stop-opacity=".1"/>
+  </linearGradient>
+  <mask id="m"><rect width="1012" height="200" rx="30" fill="#FFF"/></mask>
+  <g mask="url(#m)">
+    <rect width="702" height="200" fill="#555"/>
+    <rect width="310" height="200" fill="#08C" x="702"/>
+    <rect width="1012" height="200" fill="url(#a)"/>
+  </g>
+  <g fill="#fff" text-anchor="start" font-family="Verdana,DejaVu Sans,sans-serif" font-size="110">
+    <text x="60" y="148" textLength="602" fill="#000" opacity="0.25">Code Lines</text>
+    <text x="50" y="138" textLength="602">Code Lines</text>
+    <text x="757" y="148" textLength="210" fill="#000" opacity="0.25">782</text>
+    <text x="747" y="138" textLength="210">782</text>
+  </g>
+  
+</svg>
