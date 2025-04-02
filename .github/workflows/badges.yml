@@ -1,0 +1,35 @@
+name: Badges
+
+on:
+  push:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+  workflow_dispatch:
+
+jobs:
+  create_badges:
+    runs-on: ubuntu-latest
+    name: Create Badges
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v1
+        
+      - name: Generate Badges
+        uses: thewerthon/RepoBadges@v1.0.1
+        id: badges
+        with:
+          directory: ./
+          patterns: "**/*.ps1|**/*.json"
+          
+      - name: Deploy to Branch
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./output
+          publish_branch: badges
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
