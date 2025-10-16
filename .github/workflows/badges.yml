@@ -17,14 +17,14 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v1
-        
+
       - name: Generate Badges
         uses: thewerthon/RepoBadges@v1.0.1
         id: badges
         with:
           directory: ./
           patterns: "**/*.ps1|**/*.json"
-          
+
       - name: Deploy to Branch
         uses: peaceiris/actions-gh-pages@v3
         with:
